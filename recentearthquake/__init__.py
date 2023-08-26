@@ -5,23 +5,13 @@ from datetime import datetime, timedelta
 
 
 def extract():
-    """
-    Date: August 25, 2023, 18:42:23 WIB
-    Magnitude: 4.0
-    Depth: 3 km
-    Geolocation: 4.52 N - 96.45 E
-    Center: The earthquake center is located on land 35 km northeast of Nagan Raya Regency
-    Felt: Felt (MMI Scale): II Nagan Raya
-    """
     try:
-        content = requests.get("https://www.bmkg.go.id/en.html") # <Response [200]> means good!
+        content = requests.get("https://www.bmkg.go.id/en.html")
         # Check this for more information about HTTP response status codes:
         # https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
     except Exception:
         return None
     if content.status_code == 200:
-        # print(content.status_code)
-        # print(content.text)
         soup = BeautifulSoup(content.text, "html.parser")
         title = soup.find("title")
         print(title.string)
